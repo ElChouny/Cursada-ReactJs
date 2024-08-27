@@ -1,49 +1,49 @@
 import { useEffect, useState } from "react";
-import { ChakraProvider } from "@chakra-ui/react";
+import { ChakraProvider, Flex, Spinner } from "@chakra-ui/react";
 import MainLayout from "./layout/MainLayout";
 import ItemListContainer from "./components/ItemListContainer/ItemListContainer";
 
+import { getAllProducts } from "./services/products";
+
 function App() {
-  const [state, setState] = useState(0);
-  const [stateTwo, setStateTwo] = useState(0);
+  //Generamos el estado donde vamos a almacenar los productos
+  const [productsData, setProductsData] = useState([]);
+  const [loading, setLoading] = useState(true);
 
-  //useEffect = hook que se ejecuta despues de que el componente se renderiza, sirve para controlar efectos secundarios en el ciclo de vida del componente
-  //Se va a ejecutar SIEMPRE aunque sea una vez (la primera vez que se renderiza el componente)
-
-  //1 - useEffect Feo - useEffect sin control
   useEffect(() => {
-    console.log("Se renderizó el componente App - useEffect sin control");
-  });
-
-  //2 - useEffect ideal - useEffect controlado -- useEffect con dependencias vacias (Es el mas comun)
-  useEffect(() => {
-    // llamada a la api para traer todos mis productos
-    console.log("Me rendericé por primera vez - useEffect dependencias vacias");
+    getAllProducts()
+      .then((res) => {
+        if (res.status === 200) {
+          //Actualizamos ese estado con la informacion de la API
+          setProductsData(res.data.products);
+        } else {
+          console.log("Error");
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+      })
+      .finally(() => {
+        // Quiero que cuando finalice mi promesa - la aplicación deje de mostrar el spinner
+        setLoading(false);
+      });
   }, []);
 
-  //3 - useEffect con dependencias - useEffect controlado
-  useEffect(() => {
-    console.log("Me rendericé por primera vez - useEffect con dependencias");
-  }, [state]);
   return (
     <ChakraProvider>
       <MainLayout>
-        <ItemListContainer greeting="Bienvenidos a mi tienda!" />
-        <button
-          onClick={() => {
-            setState(state + 1);
-          }}
-        >
-          Cambio de Estado 1
-        </button>
-
-        <button
-          onClick={() => {
-            setStateTwo(stateTwo + 1);
-          }}
-        >
-          Cambio de Estado 2
-        </button>
+        {loading ? (
+          <Flex
+            width={"100%"}
+            height={"90vh"}
+            alignItems={"center"}
+            justifyContent={"center"}
+          >
+            <Spinner size="xl" />
+          </Flex>
+        ) : (
+          <ItemListContainer products={productsData} />
+        )}
       </MainLayout>
     </ChakraProvider>
   );
