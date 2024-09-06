@@ -1,10 +1,8 @@
-import { useRef } from "react";
-import NavBar from "../components/NavBar/NavBar";
+import { NavBar } from "../components";
 
 const MainLayout = ({ children }) => {
     return (
         <div>
-            <NavBar />
             {children}
         </div>
     );

@@ -11,14 +11,20 @@ import {
     Image,
     Text,
 } from "@chakra-ui/react";
+import { Link } from "react-router-dom";
 
-const ItemListContainer = ({ products }) => {
+
+export const ItemListContainer = ({ products }) => {
     return (
         <Box display={"flex"} flexWrap={"wrap"}>
             {products.map((product) => (
                 <Card key={product.id} maxW="sm" margin={"1rem"}>
                     <CardBody>
-                        <Image src={product.thumbnail} alt={product.name} borderRadius="lg" />
+                        <Image
+                            src={product.thumbnail}
+                            alt={product.name}
+                            borderRadius="lg"
+                        />
                         <Stack mt="6" spacing="3">
                             <Heading size="md">{product.title}</Heading>
                             <Text>{product.description}</Text>
@@ -30,12 +36,10 @@ const ItemListContainer = ({ products }) => {
                     <Divider />
                     <CardFooter>
                         <ButtonGroup spacing="2">
-                            <Button variant="solid" colorScheme="blue">
-                                Buy now
-                            </Button>
-                            <Button variant="ghost" colorScheme="blue">
-                                Add to cart
-                            </Button>
+                            {/* <Button variant="ghost" colorScheme="blue">
+                Add to cart
+                </Button> */}
+                            <Link to={`/item/${product.id}`}>Ir a Detalle</Link>
                         </ButtonGroup>
                     </CardFooter>
                 </Card>
@@ -43,5 +47,3 @@ const ItemListContainer = ({ products }) => {
         </Box>
     );
 };
-
-export default ItemListContainer;
