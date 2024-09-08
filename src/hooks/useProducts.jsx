@@ -1,26 +1,22 @@
-import { useEffect, useState } from "react";
-import { getAllProducts } from "../services/products";
+import React, { useState } from 'react';
+import { getAllProducts } from "../services/products.service";
 
 export const useProducts = () => {
-    const [productsData, setProductsData] = useState([]);
+    const [products, setProducts] = useState([]);
     const [loading, setLoading] = useState(true);
 
-    useEffect(() => {
+    React.useEffect(() => {
         getAllProducts()
-            .then((res) => {
-                if (res.status === 200) {
-                    setProductsData(res.data.products);
-                } else {
-                    console.log("Error");
-                }
+            .then((response) => {
+                    setProducts(response.data.products);
             })
-            .catch((err) => {
-                console.log(err);
+            .catch((error) => {
+                console.error(error);
             })
             .finally(() => {
                 setLoading(false);
             });
     }, []);
 
-    return { productsData, loading };
+    return { products, loading };
 };

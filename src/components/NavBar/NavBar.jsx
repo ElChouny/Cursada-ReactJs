@@ -16,32 +16,30 @@ import {
 import { MoonIcon, SunIcon } from "@chakra-ui/icons";
 import { CartWidget } from "../CartWidget";
 import { Link } from "react-router-dom";
+import { useCategory } from "../../hooks";
 
 export const NavBar = () => {
     const { colorMode, toggleColorMode } = useColorMode();
 
-    const menuOptions = [
-        { id: 1, label: "Category 1" },
-        { id: 2, label: "Category 2" },
-        { id: 3, label: "Category 3" },
-        { id: 4, label: "Category 4" },
-    ];
+    const { category } = useCategory();
 
     return (
         <>
             <Box bg={useColorModeValue("gray.100", "gray.900")} px={4}>
                 <Flex h={16} alignItems={"center"} justifyContent={"space-between"}>
-                    <Box>DanStore</Box>
+                    <Box>
+                        <Link to="/">TonyStore</Link>
+                    </Box>
                     <Box alignContent={"flex-start"} width={"100%"} marginLeft={30}>
                         <Menu>
-                        <Link to="/">Home</Link>
-                        <Link to="/events" style={{ marginLeft: 30 }}>Eventos</Link>
                             <MenuButton as={Link} cursor="pointer" style={{ marginLeft: 30 }}>
-                                Dynamic Menu
+                                Categorias
                             </MenuButton>
-                            <MenuList>
-                                {menuOptions.map((option) => (
-                                    <MenuItem key={option.id}>{option.label}</MenuItem>
+                            <MenuList height={"300px"} overflowY={"scroll"}>
+                                {category.map((category) => (
+                                    <MenuItem key={category.slug}>
+                                        <Link to={`/category/${category.slug}`}>{category.name}</Link>
+                                    </MenuItem>
                                 ))}
                             </MenuList>
                         </Menu>
