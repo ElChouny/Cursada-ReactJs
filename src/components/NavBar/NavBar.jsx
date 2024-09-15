@@ -17,11 +17,16 @@ import { MoonIcon, SunIcon } from "@chakra-ui/icons";
 import { CartWidget } from "../CartWidget";
 import { Link } from "react-router-dom";
 import { useCategory } from "../../hooks";
+import { CartContext} from "../../context";
+import React, { useContext } from 'react';
 
+import { useState } from "react";
 export const NavBar = () => {
     const { colorMode, toggleColorMode } = useColorMode();
 
     const { category } = useCategory();
+
+    const {cartState} = useContext (CartContext);
 
     return (
         <>
@@ -29,6 +34,7 @@ export const NavBar = () => {
                 <Flex h={16} alignItems={"center"} justifyContent={"space-between"}>
                     <Box>
                         <Link to="/">TonyStore</Link>
+                        Context Value: cartState
                     </Box>
                     <Box alignContent={"flex-start"} width={"100%"} marginLeft={30}>
                         <Menu>

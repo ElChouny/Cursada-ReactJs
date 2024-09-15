@@ -1,13 +1,14 @@
 import { ChakraProvider } from "@chakra-ui/react";
-import MainLayout from "./layout/MainLayout";
+import React from "react";
 import { MainRouter } from "./routes";
+import { CartProvider } from "./context";
 
 function App() {
   return (
     <ChakraProvider>
-      <MainLayout>
+      <CartProvider>
         <MainRouter />
-      </MainLayout>
+      </CartProvider>
     </ChakraProvider>
   );
 }
