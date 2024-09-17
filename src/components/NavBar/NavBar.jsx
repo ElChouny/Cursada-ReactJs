@@ -34,7 +34,6 @@ export const NavBar = () => {
                 <Flex h={16} alignItems={"center"} justifyContent={"space-between"}>
                     <Box>
                         <Link to="/">TonyStore</Link>
-                        Context Value: cartState
                     </Box>
                     <Box alignContent={"flex-start"} width={"100%"} marginLeft={30}>
                         <Menu>
