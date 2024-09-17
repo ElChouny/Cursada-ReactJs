@@ -1,22 +1,21 @@
-import React, { useState } from 'react';
+import React from "react";
 import { getAllProducts } from "../services/products.service";
 
 export const useProducts = () => {
-    const [products, setProducts] = useState([]);
-    const [loading, setLoading] = useState(true);
+    const [products, setProducts] = React.useState([]);
+    const [loading, setLoading] = React.useState(true);
+    const [error, setError] = React.useState(false);
 
     React.useEffect(() => {
         getAllProducts()
             .then((response) => {
-                    setProducts(response.data.products);
+                setProducts(response.data.products);
             })
             .catch((error) => {
-                console.error(error);
+                setError(true);
             })
-            .finally(() => {
-                setLoading(false);
-            });
+            .finally(() => setLoading(false));
     }, []);
 
-    return { products, loading };
+    return { products, loading, error };
 };

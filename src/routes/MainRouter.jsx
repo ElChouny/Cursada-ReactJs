@@ -1,10 +1,11 @@
-import React from 'react';
+import React from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import { Category, Events, Home, Item } from "../pages";
+import { Category, Home, Item, Memo } from "../pages";
 import { NavBar } from "../components";
 
+//rafc iniciará un componente funcional con arrow function y export
+// rafce iniciará un componente funcional con arrow function y export default
 export const MainRouter = () => {
-    //Parametro de URL: es un dato dinamico que se puede pasar a una ruta
     return (
         <BrowserRouter>
             <NavBar />
@@ -12,8 +13,7 @@ export const MainRouter = () => {
                 <Route path="/" element={<Home />} />
                 <Route path="/item/:id" element={<Item />} />
                 <Route path="/category/:categoryId" element={<Category />} />
-                {/* <Route path="/events" element={<Events handleClick={() => alert('Click')} />} /> */}
-                <Route path="/events" element={<Events label="Events" />} />
+                <Route path="/memo" element={<Memo />} />
             </Routes>
         </BrowserRouter>
     );

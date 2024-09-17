@@ -1,12 +1,13 @@
 import React from "react";
 import { useParams } from "react-router";
-import { useProductsById } from "../hooks";
-import {ItemDetailContainer} from "../components";
+import { useProductById } from "../hooks/useProductsById";
+import { ItemDetailContainer } from "../components";
+import { Spinner } from "@chakra-ui/react";
 
 export const Item = () => {
-    // useParams: hook que permite acceder a los parametros de la URL
     const { id } = useParams();
-    const { product, loading } = useProductsById(id);
 
-    return  <ItemDetailContainer product={product}/>;
+    const { product, loading } = useProductById(id);
+
+    return loading ? <Spinner /> : <ItemDetailContainer product={product} />;
 };
