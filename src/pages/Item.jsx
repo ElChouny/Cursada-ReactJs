@@ -1,6 +1,6 @@
 import React from "react";
 import { useParams } from "react-router";
-import { useProductsById } from "../hooks/useProductsById";
+import { useProductsById } from '/src/hooks/useProductsById';
 import { ItemDetailContainer } from "../components";
 import { Spinner } from "@chakra-ui/react";
 
