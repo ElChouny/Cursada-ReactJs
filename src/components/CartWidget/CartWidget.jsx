@@ -1,4 +1,5 @@
 import { useContext } from "react";
+import { Link } from 'react-router-dom';
 
 import { Flex, Text } from "@chakra-ui/react";
 import { BsMinecart } from "react-icons/bs";
@@ -10,14 +11,18 @@ export const CartWidget = () => {
     const qtyTotalItems = cartState.reduce((acc, item) => acc + item.qtyItem, 0);
 
     return (
-        <Flex
-            alignItems={"center"}
-            height={"100%"}
-            justifyContent={"space-between"}
-            width={"60px"}
-        >
-            <BsMinecart size={30} />
-            <Text fontSize={"1.5rem"}>{qtyTotalItems}</Text>
-        </Flex>
+        <Link to="/checkout">
+            <Flex
+                alignItems={"center"}
+                height={"100%"}
+                justifyContent={"space-between"}
+                width={"60px"}
+            >
+                <BsMinecart size={30} />
+                <Text fontSize={"1.5rem"}>{qtyTotalItems}</Text>
+            </Flex>
+
+        </Link>
     );
+
 };

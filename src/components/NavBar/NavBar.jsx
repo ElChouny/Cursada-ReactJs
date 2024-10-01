@@ -19,6 +19,7 @@ import { Link } from "react-router-dom";
 import { useCategory } from "../../hooks";
 import { CartContext} from "../../context";
 import React, { useContext } from 'react';
+import { createProductsFirestore } from "../../helpers";
 
 import { useState } from "react";
 export const NavBar = () => {
@@ -48,6 +49,7 @@ export const NavBar = () => {
                                 ))}
                             </MenuList>
                         </Menu>
+
                     </Box>
                     <Flex alignItems={"center"}>
                         <Stack direction={"row"} spacing={7}>

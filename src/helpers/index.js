@@ -3,6 +3,11 @@ import { getAllProducts } from "../services/products.service";
 import { db } from "./../firebase";
 import { collection, addDoc } from "firebase/firestore";
 
+
+/**
+ * 
+ * @param {String} collectionName 
+ */
 export async function createProductsFirestore(collectionName) {
     try {
         // 1. Obtener los productos de la API
